@@ -1,43 +1,39 @@
 import '6-password.dart';
 
 class User extends Password {
-  String? name;
-  int? age;
-  double? height;
-  int? id;
-  String user_password = '';
+  int id;
+  String name;
+  int age;
+  double height;
+  String _userPassword;
 
-  User({id: int, name: String, age: int, height: double, user_password: String})
-      : super(password: user_password) {
-    this.id = id;
-    this.name = name;
-    this.age = age;
-    this.height = height;
-    this.user_password = user_password;
+  User({required this.id, required this.name, required this.age, required this.height, required String user_password})
+      : _userPassword = user_password,
+        super(password: user_password);
+
+  Map<String, dynamic> toJson() {
+    return {'id': id, 'name': name, 'age': age, 'height': height, 'user_password': _userPassword};
   }
 
   static User fromJson(Map<dynamic, dynamic> userJson) {
     return User(
-        id: userJson['id'],
-        name: userJson['name'],
-        age: userJson['age'],
-        height: userJson['height'],
-        user_password: '');
+      id: userJson['id'],
+      name: userJson['name'],
+      age: userJson['age'],
+      height: userJson['height'],
+      user_password: userJson['user_password'],
+    );
   }
 
-  Map toJson() {
-    return {
-      'id': this.id,
-      'name': this.name,
-      'age': this.age,
-      'height': this.height
-    };
+  String get user_password => _userPassword;
+
+  set user_password(String newPassword) {
+    _userPassword = newPassword;
+    password = newPassword;
   }
 
   @override
   String toString() {
-    final pass = new Password(password: this.user_password);
-
-    return 'User(id : ${this.id} ,name: ${this.name}, age: ${this.age}, height: ${this.height}, Password: ${pass.isValid()})';
+    return "User(id : $id ,name: $name, age: $age, height: $height, Password: ${isValid()})";
   }
 }
