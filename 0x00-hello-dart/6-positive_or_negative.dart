@@ -1,13 +1,11 @@
-import 'dart:io';
+void main(List<String> args) {
+  var num = int.parse(args[0]);
 
-void main(List<String> arguments) {
-  int number = int.parse(arguments[0]);
-
-  if (number > 0) {
-    print('$number is positive');
-  } else if (number < 0) {
-    print('$number is negative');
+  if (num > 0) {
+    print("$num is positive");
+  } else if (num < 0) {
+    print("$num is negative");
   } else {
-    print('$number is zero');
+    print("0 is zero");
   }
 }
