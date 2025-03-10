@@ -1,12 +1,9 @@
-Future<String> fetchUser() => Future.delayed(
-      const Duration(seconds: 2),
-      () => throw 'Cannot locate user',
-    );
-    
-getUser() async {
+import '2-util.dart';
+
+Future<void> getUser() async {
   try {
     print(await fetchUser());
-  } catch (err) {
-    print('error caught: $err');
+  } catch (e) {
+    print("error caught: $e");
   }
 }
